@@ -1,0 +1,14 @@
+dependencies {
+    implementation(project(":chat-domain"))
+    implementation(project(":chat-application"))
+    implementation platform('io.awspring.cloud:spring-cloud-aws-dependencies:3.0.3')
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+}
+
+jar{
+    enabled = true
+}
+
+bootJar{
+    enabled = false
+}

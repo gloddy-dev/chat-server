@@ -1,0 +1,14 @@
+dependencies {
+    implementation(project(":chat-domain"))
+    implementation(project(":chat-application"))
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+}
+
+jar{
+    enabled = true
+}
+
+bootJar{
+    enabled = false
+}

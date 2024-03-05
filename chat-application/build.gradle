@@ -1,0 +1,13 @@
+dependencies {
+    implementation(project(":chat-domain"))
+    compileOnly("org.springframework:spring-tx")
+    compileOnly("org.springframework:spring-context")
+}
+
+jar{
+    enabled = true
+}
+
+bootJar{
+    enabled = false
+}
