@@ -32,6 +32,7 @@ allprojects {
 		testCompileOnly("org.junit.jupiter:junit-jupiter-params:5.10.1")
 		testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
 		testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
+		testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
 		testImplementation("org.springframework.boot:spring-boot-starter-test") {
 			exclude("junit")
 		}

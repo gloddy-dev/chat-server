@@ -2,7 +2,6 @@ extra["springCloudVersion"] = "2023.0.0"
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":application"))
     implementation(project(":client"))
     implementation(project(":in-message"))
     implementation(project(":out-message"))
