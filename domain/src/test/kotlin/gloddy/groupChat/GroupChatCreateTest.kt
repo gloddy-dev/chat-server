@@ -4,6 +4,7 @@ import gloddy.BaseServiceTest
 import gloddy.groupChat.dto.command.GroupChatCreateCommand
 import gloddy.groupChat.repository.GroupChatCommandRepository
 import gloddy.groupChat.service.GroupChatCommander
+import gloddy.groupChat.vo.MessageType
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -41,14 +42,19 @@ class GroupChatCreateTest : BaseServiceTest() {
         //then
         val groupChatCaptor = argumentCaptor<GroupChat>()
         val groupChatUserCaptor = argumentCaptor<GroupChatUser>()
-        verify(groupChatRepository, times(1)).save(groupChatCaptor.capture(), groupChatUserCaptor.capture())
+        val groupChatMessageCaptor = argumentCaptor<GroupChatMessage>()
+        verify(groupChatRepository, times(1)).save(groupChatCaptor.capture(), groupChatUserCaptor.capture(), groupChatMessageCaptor.capture())
 
         val groupChat = groupChatCaptor.firstValue
         val groupChatUser = groupChatUserCaptor.firstValue
+        val groupChatMessage = groupChatMessageCaptor.firstValue
 
         assertEquals(groupChat.groupId, command.groupId)
         assertEquals(groupChat.hostId, command.userId)
         assertEquals(groupChatUser.userId, command.userId)
         assertEquals(groupChatUser.chatId, groupChat.id)
+        assertEquals(groupChatMessage.userId, command.userId)
+        assertEquals(groupChatMessage.chatId, groupChat.id)
+        assertEquals(groupChatMessage.messageType, MessageType.SYSTEM_JOIN)
     }
 }

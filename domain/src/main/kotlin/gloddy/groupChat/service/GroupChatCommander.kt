@@ -7,15 +7,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class GroupChatCommander(
-    private val groupChatRepository: GroupChatCommandRepository
+    private val groupChatRepository: GroupChatCommandRepository,
 ) {
 
     fun createGroupChat(command: GroupChatCreateCommand) {
-        val newGroupChat = GroupChat(
+        val (groupChat, groupChatUser, groupChatMessage) = GroupChat(
             hostId = command.userId,
             groupId = command.groupId
-        )
-        val hostGroupChatUser = newGroupChat.participate(command.userId)
-        groupChatRepository.save(newGroupChat, hostGroupChatUser)
+        ).join(command.userId)
+        groupChatRepository.save(groupChat, groupChatUser, groupChatMessage)
     }
 }
