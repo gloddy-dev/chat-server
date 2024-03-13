@@ -2,6 +2,7 @@ package gloddy.groupChat.service
 
 import gloddy.groupChat.GroupChat
 import gloddy.groupChat.dto.command.GroupChatCreateCommand
+import gloddy.groupChat.dto.command.GroupChatCreateMessageCommand
 import gloddy.groupChat.dto.command.GroupChatJoinCommand
 import gloddy.groupChat.repository.GroupChatCommandRepository
 import org.springframework.stereotype.Service
@@ -29,5 +30,13 @@ class GroupChatCommander(
                     it.groupChatMessage
                 )
             }
+    }
+
+    fun createMessage(command: GroupChatCreateMessageCommand) {
+        val groupChat = groupChatRepository.findById(command.chatId)
+        groupChat.createUserMessage(
+            userId = command.userId,
+            content = command.content
+        ).let { groupChatRepository.save(groupChat, it) }
     }
 }
