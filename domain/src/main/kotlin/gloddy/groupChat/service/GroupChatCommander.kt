@@ -3,6 +3,7 @@ package gloddy.groupChat.service
 import gloddy.groupChat.GroupChat
 import gloddy.groupChat.dto.command.GroupChatCreateCommand
 import gloddy.groupChat.dto.command.GroupChatCreateMessageCommand
+import gloddy.groupChat.dto.command.GroupChatDeleteMessageCommand
 import gloddy.groupChat.dto.command.GroupChatJoinCommand
 import gloddy.groupChat.repository.GroupChatCommandRepository
 import org.springframework.stereotype.Service
@@ -38,5 +39,20 @@ class GroupChatCommander(
             userId = command.userId,
             content = command.content
         ).let { groupChatRepository.save(groupChat, it) }
+    }
+
+    fun deleteMessage(command: GroupChatDeleteMessageCommand) {
+        val groupChat = groupChatRepository.findById(command.chatId)
+        val groupChatMessage = groupChatRepository.findGroupChatMessageById(command.chatMessageId)
+
+        groupChat.deleteUserMessage(
+            userId = command.userId,
+            groupChatMessage = groupChatMessage
+        ).let {
+            groupChatRepository.save(
+                groupChat = it.groupChat,
+                groupChatMessage = it.groupChatMessage
+            )
+        }
     }
 }

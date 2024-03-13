@@ -13,5 +13,20 @@ data class GroupChatMessage(
     val deleted: Boolean = false,
     val deletedAt: LocalDateTime? = null,
     val id: String = UUIDGenerator.generate(),
-    val sequenceId: Long = 0L
-)
+    val sequenceId: Long = 0L,
+) {
+
+    fun delete(userId: Long): GroupChatMessage {
+        verifyAuthorization(userId)
+        return this.copy(
+            deleted = true,
+            deletedAt = LocalDateTime.now()
+        )
+    }
+
+    private fun verifyAuthorization(userId: Long) {
+        if (this.userId != userId) {
+            throw GroupChatNoAuthorizationException()
+        }
+    }
+}

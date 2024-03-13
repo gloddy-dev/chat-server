@@ -55,4 +55,18 @@ data class GroupChat(
 
         return groupChatMessage
     }
+
+    fun deleteUserMessage(userId: Long, groupChatMessage: GroupChatMessage): GroupChatMessageDeleteResult {
+        val deletedGroupChatMessage = groupChatMessage.delete(userId)
+        this.events.add(GroupChatMessageEvent(
+            userId = userId,
+            eventType = GroupChatMessageEventType.DELETE,
+            groupChatMessageId = groupChatMessage.id,
+            eventDateTime = deletedGroupChatMessage.deletedAt!!
+        ))
+        return GroupChatMessageDeleteResult(
+            groupChat = this,
+            groupChatMessage = deletedGroupChatMessage
+        )
+    }
 }

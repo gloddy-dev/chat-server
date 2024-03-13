@@ -26,7 +26,7 @@ class GroupChatCreateMessageTest : BaseServiceTest() {
     }
 
     @Test
-    @DisplayName("채팅 유저가 그룹 채팅 메시지 생성을 성공한다.")
+    @DisplayName("그룹 채팅 유저가 채팅 메시지 생성을 성공한다.")
     fun success_create_group_chat_message() {
         //given
         val command = GroupChatCreateMessageCommand(
