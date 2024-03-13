@@ -15,3 +15,12 @@ dependencyManagement {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
 }
+
+tasks {
+    withType<Jar> { enabled = false }
+    withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+        enabled = true
+        archiveFileName.set("GloddyChat.jar")
+        mainClass.set("gloddy.GloddyChatApplicationKt")
+    }
+}
