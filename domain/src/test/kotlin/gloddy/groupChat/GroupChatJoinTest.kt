@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 
-class GroupChatParticipateTest : BaseServiceTest() {
+class GroupChatJoinTest : BaseServiceTest() {
 
     private lateinit var groupChatRepository: GroupChatCommandRepository
     private lateinit var groupChatCommander: GroupChatCommander
@@ -24,7 +24,7 @@ class GroupChatParticipateTest : BaseServiceTest() {
 
     @Test
     @DisplayName("그룹 멤버가 채팅방 참여에 성공한다.")
-    fun success_create_group_chat_user() {
+    fun success_group_chat_join() {
         //given
         val command = GroupChatJoinCommand(
             groupId = 99L,
