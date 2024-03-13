@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-2
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      sqs:
+        listener:
+          poll-timeout: 20000
+
+sqs:
+  queue:
+    apply: ${APPLY_SQS_QUEUE_NAME}
