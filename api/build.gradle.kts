@@ -2,7 +2,6 @@ extra["springCloudVersion"] = "2023.0.0"
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":application"))
     implementation(project(":client"))
     implementation(project(":in-message"))
     implementation(project(":out-message"))
@@ -14,5 +13,14 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+}
+
+tasks {
+    withType<Jar> { enabled = false }
+    withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+        enabled = true
+        archiveFileName.set("GloddyChat.jar")
+        mainClass.set("gloddy.GloddyChatApplicationKt")
     }
 }
